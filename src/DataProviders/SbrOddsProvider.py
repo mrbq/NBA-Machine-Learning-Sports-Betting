@@ -8,8 +8,13 @@ class SbrOddsProvider:
         string: Full location name
     """    
 
-    def __init__(self, sportsbook="fanduel"):
-        sb = Scoreboard(sport="NBA")
+    def __init__(self, sportsbook="fanduel", date=None):
+        
+        if date:
+            sb = Scoreboard(sport="NBA",date=date)
+        else:
+            sb = Scoreboard(sport="NBA")
+
         self.games = sb.games if hasattr(sb, 'games') else []
         self.sportsbook = sportsbook
 
@@ -43,4 +48,5 @@ class SbrOddsProvider:
                 home_team_name: { 'money_line_odds': money_line_home_value }, 
                 away_team_name: { 'money_line_odds': money_line_away_value }
             }
+
         return dict_res
